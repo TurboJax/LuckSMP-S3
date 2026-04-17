@@ -7,6 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.PluginEnableEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.Main;
 
 import java.io.BufferedReader;
@@ -15,6 +17,7 @@ import java.net.URL;
 
 public class updateCheck implements Listener {
     public static String plugName = Main.getInstance().getName();
+    private static final Logger LOGGER = LoggerFactory.getLogger("LuckSMP");
 
     @EventHandler
     public void join(PlayerJoinEvent event){
@@ -63,7 +66,7 @@ public class updateCheck implements Listener {
                     });
                 }
             } catch (Exception e) {
-                Main.getInstance().getLogger().warning("Failed to check for updates: " + e.getMessage());
+                LOGGER.warn("Failed to check for updates: ", e);
             }
         });
     }

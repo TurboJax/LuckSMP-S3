@@ -1,7 +1,7 @@
 name: LuckSMPS3
-version: ${project.version} #pom.xml
+version: ${version}
 main: pl.Main
-api-version: '1.21'
+api-version: "${mcVersion}"
 commands:
   books:
     permission: op
