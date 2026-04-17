@@ -11,10 +11,10 @@ import pl.Doom.AbilityMapping;
 import pl.Main;
 
 public class EquipManager implements Listener {
-    private final AbilityManager hackManager = Main.getInstance().getAbilityManager();
+    private final AbilityManager hackManager = Main.getAbilityManager();
 
     public boolean handleLegendaryHack(Player player, AbilityMapping luckBook) {
-        boolean hasLuck = Main.getInstance().getAbilityManager().getAbility(player.getUniqueId()) != null;
+        boolean hasLuck = Main.getAbilityManager().getAbility(player.getUniqueId()) != null;
         if (hasLuck) {
             player.sendMessage("§cYou already have a luck book equipped");
             return false;

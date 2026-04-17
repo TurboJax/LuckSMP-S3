@@ -13,6 +13,7 @@ import pl.Main;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.net.URL;
 
 public class updateCheck implements Listener {
@@ -39,7 +40,7 @@ public class updateCheck implements Listener {
         Bukkit.getAsyncScheduler().runNow(Main.getInstance(), task -> {
             try {
                 String updateURL = "https://gist.githubusercontent.com/Doomwen/407b6dc6cf7e8d23432b670045523226/raw/updates.txt?t=" + System.currentTimeMillis();
-                URL url = new URL(updateURL);
+                URL url = new URI(updateURL).toURL();
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
                 String latestVersion = null;

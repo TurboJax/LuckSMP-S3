@@ -7,7 +7,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.event.Listener;
 import pl.Doom.AbilityMapping;
 import pl.Main;
@@ -15,11 +14,6 @@ import pl.Main;
 public class Withdraw implements CommandExecutor, Listener {
 
     private final AbilityManager hackManager = new AbilityManager();
-    private final Plugin plugin;
-
-    public Withdraw(Plugin plugin) {
-        this.plugin = plugin;
-    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -28,7 +22,7 @@ public class Withdraw implements CommandExecutor, Listener {
             return true;
         }
 
-        final AbilityMapping hack = Main.getInstance().getAbilityManager().getAbility(player.getUniqueId());
+        final AbilityMapping hack = Main.getAbilityManager().getAbility(player.getUniqueId());
         if (hack == null) {
             player.sendMessage(ChatColor.RED + "No luck book equipped");
             return true;

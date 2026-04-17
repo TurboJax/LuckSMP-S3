@@ -24,7 +24,7 @@ public class passives implements Listener {
                         case THUNDERCHARGE -> p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, 0));
                         case ADRENALINE_RUSH -> p.addPotionEffect(new PotionEffect(PotionEffectType.HASTE, 40, 0));
                         case RAW_STRENGTH -> p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 40, 0));
-
+                        default -> {}
                     }
                 }
             }

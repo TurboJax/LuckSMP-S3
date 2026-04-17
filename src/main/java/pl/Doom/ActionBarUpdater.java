@@ -1,15 +1,11 @@
 package pl.Doom;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import pl.CooldownCommand;
 import pl.Main;
 import pl.managers.CooldownManager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class ActionBarUpdater extends BukkitRunnable {

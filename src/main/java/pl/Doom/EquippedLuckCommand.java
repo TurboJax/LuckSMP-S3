@@ -18,7 +18,7 @@ public class EquippedLuckCommand implements Listener, CommandExecutor {
     private void openEquippedBooksGUI(Player player) {
         String GUI2 = GUI;
         Inventory gui = Bukkit.createInventory(null, 9, GUI2);
-        AbilityMapping luck = Main.getInstance().getAbilityManager().getAbility(player.getUniqueId());
+        AbilityMapping luck = Main.getAbilityManager().getAbility(player.getUniqueId());
         if (luck != null) {
             gui.setItem(4, luck.createItem());
         }
@@ -39,7 +39,7 @@ public class EquippedLuckCommand implements Listener, CommandExecutor {
 
     @EventHandler
     public void Interact(InventoryClickEvent event) {
-        if (event.getWhoClicked() instanceof Player player) {
+        if (event.getWhoClicked() instanceof Player) {
             String guiTitle = event.getView().getTitle();
             if (guiTitle.contains(GUI)) {
                 event.setCancelled(true);

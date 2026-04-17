@@ -96,7 +96,7 @@ public final class Main extends JavaPlugin implements Listener {
     public void commands() {
         Objects.requireNonNull(getCommand("books")).setExecutor(new pl.Doom.Books());
         Objects.requireNonNull(getCommand("luck")).setExecutor(new EquippedLuckCommand());
-        Objects.requireNonNull(getCommand("withdraw")).setExecutor(new Withdraw(this));
+        Objects.requireNonNull(getCommand("withdraw")).setExecutor(new Withdraw());
 
         ezCommands();
         Objects.requireNonNull(getCommand("trust")).setExecutor(new TrustCommand(trustManager));
