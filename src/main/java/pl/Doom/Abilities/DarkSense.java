@@ -15,12 +15,13 @@ import pl.Main;
 
 public class DarkSense implements Listener {
     @EventHandler
-    public void interact(PlayerInteractEvent event){
+    public void interact(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (!event.getAction().isRightClick())return;
-        if (player.getInventory().getItemInMainHand().getType() != Material.SCULK_CATALYST)return;
-        if (player.hasCooldown(Material.SCULK_CATALYST))return;
-        if (Main.getAbilityManager().getAbility(player.getUniqueId()) != AbilityMapping.DARK_SENSE)return;
+        if (!event.getAction().isRightClick()) return;
+        if (player.getInventory().getItemInMainHand().getType() != Material.SCULK_CATALYST) return;
+        if (player.hasCooldown(Material.SCULK_CATALYST)) return;
+        if (Main.getAbilityManager().getAbility(player.getUniqueId()) != AbilityMapping.DARK_SENSE)
+            return;
         event.setCancelled(true);
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_BURP, 1, 1);
         String name = "dark_sense";

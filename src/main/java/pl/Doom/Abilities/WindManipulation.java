@@ -26,17 +26,20 @@ public class WindManipulation implements Listener {
 
         String name = "wind_manipulation1";
         if (CooldownManager.isOnCooldown(player.getUniqueId(), "1")) return;
-        if (Main.getAbilityManager().getAbility(player.getUniqueId()) != AbilityMapping.WIND_MANIPULATION) return;
+        if (Main.getAbilityManager().getAbility(player.getUniqueId())
+                != AbilityMapping.WIND_MANIPULATION) return;
 
         int chance = Main.getInstance().getConfig().getInt("chances." + name, 50);
         int cooldown = Main.getInstance().getConfig().getInt("cooldowns." + name, 35);
-        int distance = Main.getInstance().getConfig().getInt("WindManipulationMaceMinFallDistance", 5);
+        int distance =
+                Main.getInstance().getConfig().getInt("WindManipulationMaceMinFallDistance", 5);
 
         if (player.getFallDistance() < distance) return;
-        if (!player.getInventory().getItemInMainHand().getType().toString().contains("_AXE"))return;
+        if (!player.getInventory().getItemInMainHand().getType().toString().contains("_AXE"))
+            return;
 
         if (Math.random() * 100 < chance) {
-            if (Main.isTrusted(player, target))return;
+            if (Main.isTrusted(player, target)) return;
             mace(event, player.getFallDistance());
             CooldownManager.setCooldown(player.getUniqueId(), "1", cooldown);
         }
@@ -46,7 +49,7 @@ public class WindManipulation implements Listener {
         Entity target = event.getEntity();
         target.getWorld().playSound(target.getLocation(), Sound.ITEM_MACE_SMASH_GROUND_HEAVY, 1, 1);
 
-        Block block = event.getEntity().getLocation().clone().subtract(0,1, 0).getBlock();
+        Block block = event.getEntity().getLocation().clone().subtract(0, 1, 0).getBlock();
         if (block.getType() != Material.AIR) {
             int radius = 2;
             for (int i = 0; i < 360; i += 8) {
@@ -58,10 +61,17 @@ public class WindManipulation implements Listener {
                 double y = loc.getY();
                 double z = loc.getZ() + (radius * Math.sin(angle));
                 Location particleLoc = new Location(world, x, y, z);
-                world.spawnParticle(Particle.DUST_PILLAR, particleLoc, 1, 0, 0, 0, 0, block.getType().createBlockData());
+                world.spawnParticle(
+                        Particle.DUST_PILLAR,
+                        particleLoc,
+                        1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        block.getType().createBlockData());
             }
         }
-
 
         double damage = Main.getInstance().getConfig().getDouble("damage.wind_manipulation1", 2.5);
         double finalDamage = fall * damage;
@@ -78,7 +88,8 @@ public class WindManipulation implements Listener {
 
         String name = "wind_manipulation2";
         if (CooldownManager.isOnCooldown(player.getUniqueId(), "2")) return;
-        if (Main.getAbilityManager().getAbility(player.getUniqueId()) != AbilityMapping.WIND_MANIPULATION) return;
+        if (Main.getAbilityManager().getAbility(player.getUniqueId())
+                != AbilityMapping.WIND_MANIPULATION) return;
 
         int chance = Main.getInstance().getConfig().getInt("chances." + name, 45);
         int cooldown = Main.getInstance().getConfig().getInt("cooldowns." + name, 35);
@@ -86,7 +97,7 @@ public class WindManipulation implements Listener {
         int damage = Main.getInstance().getConfig().getInt("damage." + name, 2);
 
         if (Math.random() * 100 < chance) {
-            if (Main.isTrusted(player, target))return;
+            if (Main.isTrusted(player, target)) return;
             TrueDamage.trueDamage(target, damage, player);
             pullTargetToPlayer(target, player, duration);
             CooldownManager.setCooldown(player.getUniqueId(), "2", cooldown);
@@ -125,9 +136,11 @@ public class WindManipulation implements Listener {
                     from.getWorld().spawnParticle(Particle.ELECTRIC_SPARK, point, 0, 0, 0, 0, 0);
                 }
 
-                Vector direction = player.getLocation().toVector()
-                        .subtract(target.getLocation().toVector())
-                        .normalize();
+                Vector direction =
+                        player.getLocation()
+                                .toVector()
+                                .subtract(target.getLocation().toVector())
+                                .normalize();
                 target.setVelocity(direction.multiply(1.5));
                 ticks++;
             }
@@ -144,7 +157,9 @@ public class WindManipulation implements Listener {
 
             @Override
             public void run() {
-                if (ticks >= duration * 20 || target.isDead() || target.getLocation().distance(freezeLocation) > 2) {
+                if (ticks >= duration * 20
+                        || target.isDead()
+                        || target.getLocation().distance(freezeLocation) > 2) {
                     cancel();
                     return;
                 }
@@ -162,7 +177,6 @@ public class WindManipulation implements Listener {
         }
     }
 
-
     @EventHandler
     public void consume(PlayerItemConsumeEvent event) {
         if (CooldownManager.isOnCooldown(event.getPlayer().getUniqueId(), "frozen_ability_1")) {
@@ -177,5 +191,4 @@ public class WindManipulation implements Listener {
             event.setCancelled(true);
         }
     }
-
 }
